@@ -3,21 +3,19 @@
 import { TabName, tabNames } from "@/lib/types";
 import { capitalize } from "@/lib/utils/operations";
 import { usePathname, useRouter } from "next/navigation";
-import { filterToDo, useTodos } from "@/lib/redux/hooks";
-import { useIsMounted } from "@/lib/utils/hooks";
+import { filterToDo, useTheme, useTodos } from "@/lib/redux/hooks";
 
 export function SideBar({ tab }: { tab: TabName }) {
   const router = useRouter();
   const pathName = usePathname();
   const todos = useTodos("all");
-  const isMounted = useIsMounted();
-  if (!isMounted) return null;
+  const theme = useTheme();
   return (
     <div className={"bg-sky-100 grow"}>
       <div className={"py-4 px-2 flex flex-col gap-4"}>
         <UserInfo />
         <div className={"flex flex-col gap-0.5"}>
-          {todos.todos.length &&
+          {todos.todos.length > 0 &&
             tabNames.map((name) => (
               <button
                 key={name}
@@ -26,6 +24,9 @@ export function SideBar({ tab }: { tab: TabName }) {
                 flex items-center justify-between
                 ${tab === name ? " bg-blue-400 text-slate-100" : ""}
                 `}
+                // style={{
+                //   backgroundColor: theme.secondary,
+                // }}
                 onClick={() => {
                   router.push(`${pathName}?tab=${name}`);
                 }}

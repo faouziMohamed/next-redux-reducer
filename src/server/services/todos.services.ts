@@ -7,6 +7,11 @@ export async function getTodos() {
   return (await response.json()) as Todo[];
 }
 
+export async function getTodoById(id: string) {
+  const response = await fetch(`${DB_SERVER_URL}/todos/${id}`);
+  return (await response.json()) as Todo;
+}
+
 export async function addTodo(todo: Todo) {
   const response = await fetch(`${DB_SERVER_URL}/todos`, {
     method: "POST",
@@ -34,5 +39,15 @@ export async function updateToDo(id: string, todo: Todo) {
   } catch (e) {
     console.log("Error", e);
     return { message: "Error trashing todo" };
+  }
+}
+
+export async function getOneToDo(id: string) {
+  try {
+    const response = await fetch(`${DB_SERVER_URL}/todos/${id}`);
+    return (await response.json()) as Todo;
+  } catch (e) {
+    console.log("Error", e);
+    return null;
   }
 }

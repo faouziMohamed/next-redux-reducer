@@ -46,7 +46,7 @@ export const addTodoActionAsync = createAsyncThunk(
   "todos/addTodoAsync",
   async (value: string) => {
     const todo: Todo = {
-      id: 0,
+      id: "0",
       title: value,
       done: false,
       trashed: false,
@@ -78,6 +78,13 @@ export const toggleDoneAsync = createAsyncThunk(
   async (todo: Todo) => {
     const toUpdate = { ...todo, done: !todo.done, doneAt: new Date() };
     return await updateTodo(toUpdate);
+  },
+);
+
+export const updateAsync = createAsyncThunk(
+  "todos/updateDescriptionAsync",
+  async (todo: Todo) => {
+    return await updateTodo(todo);
   },
 );
 

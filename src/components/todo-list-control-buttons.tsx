@@ -16,7 +16,7 @@ import { IoCloseCircleSharp } from "react-icons/io5";
 export function TodoListControlButtons({ todo }: { todo: Todo }) {
   const dispatch = useAppDispatch();
   return (
-    <span className={"flex "}>
+    <span className={"flex"}>
       <IconButton
         className={"p-2 hover:bg-blue-400 group"}
         Icon={
@@ -27,6 +27,8 @@ export function TodoListControlButtons({ todo }: { todo: Todo }) {
           )
         }
         onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
           dispatch(toggleDoneAsync(todo));
         }}
       />
@@ -43,6 +45,7 @@ export function TodoListControlButtons({ todo }: { todo: Todo }) {
         }
         onClick={async (e) => {
           e.stopPropagation();
+          e.preventDefault();
 
           dispatch(
             todo.trashed

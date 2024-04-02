@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
   }
   const todos = await getTodos();
   const newId = todos.length ? todos.length + 1 : 1;
-  const newTodo: Todo = { ...todo, id: newId, addedAt: new Date() };
+  const newTodo: Todo = { ...todo, id: newId.toString(), addedAt: new Date() };
   const added = await addTodo(newTodo);
   return NextResponse.json(added, { status: 201 });
 }

@@ -8,7 +8,7 @@ import { capitalize } from "@/lib/utils/operations";
 
 export function MainContent({ tab }: { tab: TabName }) {
   return (
-    <main className={"basis-3/4"}>
+    <main className={"basis-3/4 overflow-y-auto"}>
       <div className={"py-4 px-4"}>
         <TitleAndSubTitle />
         <Divider />

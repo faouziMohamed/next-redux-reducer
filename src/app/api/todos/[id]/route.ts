@@ -1,8 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
-import { updateToDo } from "@/server/services/todos.services";
+import { getOneToDo, updateToDo } from "@/server/services/todos.services";
 import { Todo } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
+
+export async function GET(
+  req: NextRequest,
+  { params: { id } }: { params: { id: string } },
+) {
+  if (Number.isNaN(parseInt(id)))
+    return NextResponse.json(
+      { message: "Invalid id or todo not found" },
+      { status: 404 },
+    );
+  const todo = await getOneToDo(String(id));
+  return NextResponse.json(todo);
+}
 
 export async function DELETE(
   req: NextRequest,

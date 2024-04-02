@@ -39,9 +39,6 @@ export function useTodos(tabName?: AllTabNames): Todos {
   };
 }
 
-export function useAllTodos(tabName?: TabName): Todos {
-  const list = useAppSelector((state) => state.todoReducer);
-  return {
-    todos: filterToDo("todo", list),
-  };
+export function useTheme() {
+  return useAppSelector((state) => state.themeReducer);
 }

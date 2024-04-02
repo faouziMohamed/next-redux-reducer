@@ -1,11 +1,9 @@
 import { MainContent } from "@/components/main-content";
-import { Header } from "@/components/header";
 import { SideBar } from "@/components/sidebar";
 import { TabName, tabNames } from "@/lib/types";
 
 type PageParams = {
-  params: { id: string };
-  searchParams: { tab: TabName };
+  searchParams: { tab: TabName; theme: string };
 };
 export default function Home({ searchParams: { tab: tb } }: PageParams) {
   let tab: TabName = tb;
@@ -13,12 +11,9 @@ export default function Home({ searchParams: { tab: tb } }: PageParams) {
     tab = tabNames[0];
   }
   return (
-    <div className="absolute inset-0 bg-slate-50 overflow-hidden text-black">
-      <Header />
-      <div className={"flex items-stretch overflow-hidden h-full"}>
-        <MainContent tab={tab} />
-        <SideBar tab={tab} />
-      </div>
+    <div className={"flex overflow-hidden h-full"}>
+      <MainContent tab={tab} />
+      <SideBar tab={tab} />
     </div>
   );
 }
